@@ -1,0 +1,283 @@
+.love-letter-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a0004;
+}
+
+/* ─── Rose Background Layers ───────────────────────── */
+.rose-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.rose-layer-1 {
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(139, 10, 26, 0.6) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(196, 30, 58, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(74, 14, 43, 0.5) 0%, transparent 60%);
+    z-index: 1;
+    animation: roseShift1 15s ease-in-out infinite alternate;
+}
+
+.rose-layer-2 {
+    background:
+        radial-gradient(circle at 30% 30%, rgba(232, 84, 107, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(212, 165, 116, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 20%, rgba(255, 107, 138, 0.15) 0%, transparent 35%);
+    z-index: 2;
+    animation: roseShift2 20s ease-in-out infinite alternate;
+}
+
+.rose-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 0, 4, 0.7) 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes roseShift1 {
+    0% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes roseShift2 {
+    0% {
+        opacity: 0.6;
+        transform: scale(1.05) rotate(1deg);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1) rotate(-1deg);
+    }
+
+    100% {
+        opacity: 0.7;
+        transform: scale(1.03) rotate(0deg);
+    }
+}
+
+/* ─── Floating Petals ──────────────────────────────── */
+.petals-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.floating-petal {
+    position: absolute;
+    top: -30px;
+    animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+    0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    90% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(var(--rotation, 360deg)) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* ─── Letter Card ──────────────────────────────────── */
+.letter-card {
+    position: relative;
+    z-index: 10;
+    width: min(90%, 520px);
+    max-height: 85vh;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 182, 193, 0.15);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 60px rgba(196, 30, 58, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Scrollbar styling */
+.letter-card::-webkit-scrollbar {
+    width: 4px;
+}
+
+.letter-card::-webkit-scrollbar-thumb {
+    background: rgba(255, 182, 193, 0.2);
+    border-radius: 2px;
+}
+
+.letter-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ─── Card Header ──────────────────────────────────── */
+.card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: gentleBounce 2s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.card-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #FFB6C1;
+    text-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+    margin-bottom: 0.8rem;
+}
+
+.card-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.card-divider::before,
+.card-divider::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 182, 193, 0.3),
+            transparent);
+}
+
+.divider-heart {
+    color: rgba(255, 107, 138, 0.5);
+    font-size: 0.8rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.2);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+}
+
+/* ─── Letter Body ──────────────────────────────────── */
+.letter-body {
+    margin-bottom: 2rem;
+}
+
+.letter-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(255, 245, 247, 0.85);
+    line-height: 1.85;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* ─── Letter Footer ────────────────────────────────── */
+.letter-footer {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 182, 193, 0.1);
+}
+
+.footer-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: rgba(255, 182, 193, 0.7);
+    text-shadow: 0 0 15px rgba(255, 182, 193, 0.2);
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 480px) {
+    .letter-card {
+        padding: 1.5rem;
+        border-radius: 18px;
+    }
+
+    .card-title {
+        font-size: 1.8rem;
+    }
+
+    .letter-text {
+        font-size: 0.95rem;
+    }
+}

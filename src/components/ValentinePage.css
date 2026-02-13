@@ -1,0 +1,363 @@
+.valentine-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg,
+            #1a0008 0%,
+            #2d0a1a 20%,
+            #4a0e2b 40%,
+            #3d0c1e 60%,
+            #2a0815 80%,
+            #1a0008 100%);
+}
+
+/* ─── Floating Hearts ──────────────────────────────── */
+.hearts-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -40px;
+    animation: floatUp linear infinite;
+    filter: blur(0.5px);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: var(--heart-opacity, 0.3);
+    }
+
+    90% {
+        opacity: var(--heart-opacity, 0.3);
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* ─── Glowing Orbs ─────────────────────────────────── */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.3), transparent);
+    top: -100px;
+    right: -100px;
+    animation: orbFloat 8s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 107, 138, 0.25), transparent);
+    bottom: -80px;
+    left: -80px;
+    animation: orbFloat 10s ease-in-out infinite alternate-reverse;
+}
+
+.orb-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.2), transparent);
+    top: 40%;
+    left: 50%;
+    animation: orbFloat 12s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(30px, -20px) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-20px, 30px) scale(0.95);
+    }
+}
+
+/* ─── Main Content ─────────────────────────────────── */
+.valentine-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+}
+
+.sparkle-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.valentine-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow:
+        0 0 20px rgba(255, 107, 138, 0.6),
+        0 0 40px rgba(196, 30, 58, 0.4),
+        0 0 80px rgba(196, 30, 58, 0.2);
+    letter-spacing: 1px;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.title-emoji {
+    display: block;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin-top: 0.5rem;
+    animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 20px rgba(255, 107, 138, 0.6), 0 0 40px rgba(196, 30, 58, 0.4);
+    }
+
+    100% {
+        text-shadow: 0 0 30px rgba(255, 107, 138, 0.8), 0 0 60px rgba(196, 30, 58, 0.6), 0 0 100px rgba(196, 30, 58, 0.3);
+    }
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.1);
+    }
+}
+
+/* ─── Sad Message ──────────────────────────────────── */
+.sad-message {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    color: var(--rose-blush);
+    margin-bottom: 1.5rem;
+    animation: fadeSlideIn 0.4s ease-out;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─── Buttons ──────────────────────────────────────── */
+.buttons-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    padding: 0.85rem 2.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #C41E3A 0%, #E8546B 50%, #FF6B8A 100%);
+    color: #fff;
+    box-shadow:
+        0 4px 15px rgba(196, 30, 58, 0.4),
+        0 0 30px rgba(255, 107, 138, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-yes:hover {
+    box-shadow:
+        0 6px 25px rgba(196, 30, 58, 0.6),
+        0 0 50px rgba(255, 107, 138, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.btn-yes::after {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.btn-no {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFB6C1;
+    border: 1.5px solid rgba(255, 182, 193, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-no:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 182, 193, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-no-escaped {
+    z-index: 20;
+    animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ─── Emoji Overlays ───────────────────────────────── */
+.emoji-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.sad-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease, fadeOut 0.3s ease 0.9s forwards;
+}
+
+.happy-overlay {
+    background: rgba(139, 10, 26, 0.6);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.4s ease;
+}
+
+.big-emoji {
+    font-size: 6rem;
+}
+
+.bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bounceIn {
+    from {
+        transform: scale(0) rotate(-20deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.happy-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #FFB6C1;
+    margin-top: 1rem;
+    animation: fadeSlideIn 0.6s ease 0.3s both;
+    text-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 480px) {
+    .valentine-title {
+        font-size: 2.2rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1.6rem;
+        font-size: 1rem;
+    }
+
+    .big-emoji {
+        font-size: 4rem;
+    }
+}

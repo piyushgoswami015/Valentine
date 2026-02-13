@@ -1,0 +1,269 @@
+.celebration-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(135deg,
+            #1a0008 0%,
+            #3d0c1e 30%,
+            #5a1035 50%,
+            #3d0c1e 70%,
+            #1a0008 100%);
+}
+
+/* ─── Confetti ─────────────────────────────────────── */
+.confetti-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -40px;
+    animation: confettiFall linear infinite;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg) scale(0.5);
+        opacity: 0.3;
+    }
+}
+
+/* ─── Glow Bursts ──────────────────────────────────── */
+.glow-burst {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-burst-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 107, 138, 0.4), transparent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: burstPulse 2s ease-in-out infinite alternate;
+}
+
+.glow-burst-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.3), transparent);
+    top: 20%;
+    right: 10%;
+    animation: burstPulse 3s ease-in-out infinite alternate-reverse;
+}
+
+.glow-burst-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.3), transparent);
+    bottom: 10%;
+    left: 10%;
+    animation: burstPulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes burstPulse {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+.glow-burst-2,
+.glow-burst-3 {
+    animation-name: burstPulseAlt;
+}
+
+@keyframes burstPulseAlt {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.85);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: scale(1.15);
+    }
+}
+
+/* ─── Content ──────────────────────────────────────── */
+.celebration-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+}
+
+.yea-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow:
+        0 0 30px rgba(255, 107, 138, 0.8),
+        0 0 60px rgba(196, 30, 58, 0.5),
+        0 0 100px rgba(196, 30, 58, 0.3);
+    animation: yeaBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), yeaGlow 2s ease-in-out infinite alternate 0.8s;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes yeaBounce {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2) rotate(3deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes yeaGlow {
+    0% {
+        text-shadow: 0 0 30px rgba(255, 107, 138, 0.8), 0 0 60px rgba(196, 30, 58, 0.5);
+    }
+
+    100% {
+        text-shadow: 0 0 50px rgba(255, 107, 138, 1), 0 0 100px rgba(196, 30, 58, 0.7), 0 0 150px rgba(196, 30, 58, 0.4);
+    }
+}
+
+/* ─── GIF ───────────────────────────────────────────── */
+.gif-container {
+    margin-bottom: 1.5rem;
+    animation: gifAppear 0.6s ease 0.4s both;
+}
+
+@keyframes gifAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.mind-blown-gif {
+    width: min(300px, 70vw);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 182, 193, 0.2);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(255, 107, 138, 0.15);
+}
+
+/* ─── Love Message ─────────────────────────────────── */
+.love-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #FFB6C1;
+    text-shadow: 0 0 25px rgba(255, 182, 193, 0.5);
+    animation: loveAppear 0.6s ease 0.8s both, heartbeat 1.5s ease-in-out infinite 1.4s;
+    margin-bottom: 2rem;
+}
+
+@keyframes loveAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.08);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.05);
+    }
+}
+
+/* ─── Tap Hint ─────────────────────────────────────── */
+.tap-hint {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 182, 193, 0.4);
+    animation: fadeInHint 1s ease 2s both, hintPulse 2s ease-in-out infinite 3s;
+}
+
+@keyframes fadeInHint {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes hintPulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 480px) {
+    .mind-blown-gif {
+        width: 220px;
+    }
+}
